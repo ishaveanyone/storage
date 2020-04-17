@@ -1,4 +1,40 @@
-
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update # 数据库的操作模式
+    show-sql: false # 是否在控制台打印SQL语句
+    properties:
+      hibernate:
+        default_schema: test
+  aop:
+    auto: true
+    proxy-target-class: true # 默认设置为false,使用的是标准Java动态代理的实现（接口），而不是cglib（类）
+  jmx:
+    default-domain: test # 指定JMX define name
+  datasource:
+    sql-script-encoding: utf-8 # 解决中文乱码
+    url: jdbc:postgresql://127.0.0.1:15432/test
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver
+    maxActive: 200
+    initialSize: 10
+    minIdle: 10
+    maxWait: 60000
+    testWhileIdle: true
+    removeAbandoned: true
+    removeAbandonedTimeout: 180
+    logAbandoned: false
+    minEvictableIdleTimeMillis: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    testOnBorrow: false
+    #validationQuery: select 1 from dual
+    validationQuery: select version();
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 200
+    #monitor: true # 是否启用数据库连接池监控，开启后损失部分性能
+    #filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
 storage:
   temp_upload_path: temp/upload # 上传临时文件
   temp_download_path: temp/download #下载临时文件
