@@ -1,0 +1,24 @@
+
+storage:
+  temp_upload_path: temp/upload # 上传临时文件
+  temp_download_path: temp/download #下载临时文件
+  type: oss # 默认启用文服务类型
+  convertor: #文件预览配置
+    type: KKFILEVIEW #默认使用 jacob进行文件的 预览
+    environment: wps # 本机使用的office产品
+    server: http://127.0.0.1:8012/ #如果使用 office 其他服务端帮助转换返回地址 请配置服务端地址
+  oss:
+    endpoint:  #文件服务节点
+    accessKeyId:  #ak
+    accessKeySecret:  #sk
+    bucketName:  # 命名空间
+  mongo:
+    host: 127.0.0.1 # 服务器地址
+    port: 27017 # 对应的Mongo 监听端口
+    database: omsMongo
+    collection:  # 默认的存储集合
+    auth: # 是否开启用户验证的方式
+      enable: true #是否开启用户验证
+      username:  #配置授权用户对应的用户名称
+      password:  #配置授权用户对应的用户密码
+      database:   #认证用户存放的数据库位置
