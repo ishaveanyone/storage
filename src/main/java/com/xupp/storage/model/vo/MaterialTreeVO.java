@@ -1,5 +1,5 @@
 
-package com.xupp.storage.define;
+package com.xupp.storage.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

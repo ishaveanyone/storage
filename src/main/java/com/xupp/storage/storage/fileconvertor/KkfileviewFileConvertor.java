@@ -2,9 +2,9 @@
 package com.xupp.storage.storage.fileconvertor;
 
 import com.xupp.storage.define.Constants;
-import com.xupp.storage.define.HttpUrlUtil;
-import com.xupp.storage.define.MaterialViewResultVO;
-import com.xupp.storage.define.StringUtil;
+import com.xupp.storage.define.util.HttpUrlUtil;
+import com.xupp.storage.model.vo.MaterialViewResultVO;
+import com.xupp.storage.define.util.StringUtil;
 import org.springframework.stereotype.Component;
 
 /**

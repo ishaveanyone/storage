@@ -1,4 +1,4 @@
-package com.xupp.storage.define;
+package com.xupp.storage.model.vo;
 
 import lombok.Getter;
 import lombok.Setter;

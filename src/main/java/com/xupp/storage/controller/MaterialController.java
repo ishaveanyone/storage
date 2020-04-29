@@ -5,6 +5,8 @@ package com.xupp.storage.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.xupp.storage.define.*;
 import com.xupp.storage.facade.MaterialFacade;
+import com.xupp.storage.model.dto.MaterialQueryDTO;
+import com.xupp.storage.model.vo.MaterialViewResultVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -169,10 +171,6 @@ public class MaterialController {
             @RequestBody  MaterialQueryDTO materialQueryDTO){
         return this.materialFacade.checkUploaded(materialQueryDTO);
     }
-
-
-
-
 
 
     //断点续传

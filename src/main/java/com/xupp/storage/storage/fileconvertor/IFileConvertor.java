@@ -2,7 +2,7 @@
 
 package com.xupp.storage.storage.fileconvertor;
 
-import com.xupp.storage.define.MaterialViewResultVO;
+import com.xupp.storage.model.vo.MaterialViewResultVO;
 
 public interface IFileConvertor {
     /**

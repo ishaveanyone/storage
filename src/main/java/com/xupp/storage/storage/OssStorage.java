@@ -5,6 +5,7 @@ import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.*;
 
 import com.xupp.storage.ApplicationContextProvider;
+import com.xupp.storage.storage.config.MongoStorageConfig;
 import com.xupp.storage.storage.config.OssStorageConfig;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,15 @@ import java.util.Map;
 import java.util.concurrent.Future;
 import static com.xupp.storage.storage.IStorage.checkSpaceLegal;
 
-@Component
 public class OssStorage implements IStorage {
 
     private OSS ossClient;
 
-    @Autowired
-    private OssStorageConfig ossStorageConfig;
 
+    private OssStorageConfig ossStorageConfig;
+    {
+        ossStorageConfig=ApplicationContextProvider.getBean(OssStorageConfig.class);
+    }
 
     @Override
     public IStorage connect(){

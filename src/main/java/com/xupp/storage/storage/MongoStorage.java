@@ -34,14 +34,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.xupp.storage.storage.IStorage.checkSpaceLegal;
 
 //version mongo-3.4版本
-@Component
 public class MongoStorage  implements IStorage {
 
     private MongoClient mongoClient;
 
     //不要使用依赖注入 如果使用依赖注入那么新创建的
-    @Autowired
+
     private MongoStorageConfig mongoStorageConfig;
+
+    {
+        mongoStorageConfig=ApplicationContextProvider.getBean(MongoStorageConfig.class);
+    }
 
 
     @Override
@@ -126,17 +129,6 @@ public class MongoStorage  implements IStorage {
 
     @Override
     public InputStream downloadFileFromSpace(String space, String targetKey) {
-       /* space= checkSpaceLegal(space,mongoStorageConfig.getCollection());
-        MongoDatabase db = mongoClient.getDatabase(mongoStorageConfig.getDatabase());
-        GridFSBucket bucket = GridFSBuckets.create(db,space);
-        GridFSFindIterable gridFSFiles=
-                bucket.find(Filters.eq("_id", targetKey));
-//        System.out.println( gridFSFiles.iterator().next().getFilename());
-        MongoCursor<GridFSFile> mongoCursor= gridFSFiles.iterator();
-        if(mongoCursor.hasNext()){
-            return bucket.openDownloadStream(mongoCursor.next().getId());
-        }
-        return null;*/
         space= checkSpaceLegal(space,mongoStorageConfig.getCollection());
         MongoDatabase db = mongoClient.getDatabase(mongoStorageConfig.getDatabase());
         GridFSBucket bucket = GridFSBuckets.create(db,space);
@@ -156,33 +148,17 @@ public class MongoStorage  implements IStorage {
 
     @Override
     public boolean removeFile(String space, String key) {
-        /*space= checkSpaceLegal(space,mongoStorageConfig.getCollection());
-        MongoDatabase db = mongoClient.getDatabase(mongoStorageConfig.getDatabase());
-        GridFSBucket bucket = GridFSBuckets.create(db,space);
-        GridFSFindIterable gridFSFiles=
-                bucket.find(Filters.eq("_id", key));
-//        System.out.println( gridFSFiles.iterator().next().getFilename());
-        MongoCursor<GridFSFile> mongoCursor= gridFSFiles.iterator();
-        if(!mongoCursor.hasNext()){
-
-            return true;
-        }
-        bucket.delete(mongoCursor.next().getId());
-        return  !bucket.find(Filters.eq("_id", key)).iterator().hasNext();*/
         space= checkSpaceLegal(space,mongoStorageConfig.getCollection());
         MongoDatabase db = mongoClient.getDatabase(mongoStorageConfig.getDatabase());
         GridFSBucket bucket = GridFSBuckets.create(db,space);
         GridFSFindIterable gridFSFiles=
                 bucket.find(Filters.eq("metadata.refid", key));
-//        System.out.println( gridFSFiles.iterator().next().getFilename());
         MongoCursor<GridFSFile> mongoCursor= gridFSFiles.iterator();
         if(!mongoCursor.hasNext()){
             return true;
         }
         bucket.delete(mongoCursor.next().getId());
         return  !bucket.find(Filters.eq("metadata.refid", key)).iterator().hasNext();
-
-
     }
 
     @Override
@@ -199,27 +175,6 @@ public class MongoStorage  implements IStorage {
     public boolean uploadContinue(String space, Integer chunkNum,
                                                String targetKey, File file)
             throws Throwable {
-        /*space= checkSpaceLegal(space,mongoStorageConfig.getCollection());
-        MongoDatabase db = mongoClient.getDatabase(mongoStorageConfig.getDatabase());
-        GridFSBucket bucket = GridFSBuckets.create(db,space); // 如果这里不指定 集合 也就是 bucket 那么默认就是 fs
-        BsonValue id= new BsonString(targetKey+"_"+chunkNum);
-        GridFSUploadStream uploadStreamStream =bucket.openUploadStream(id,targetKey);
-        ReadableByteChannel finChannel=
-                Channels.newChannel(new FileInputStream(file));
-        ByteBuffer byteBuffer=ByteBuffer.allocate(1024);
-        Bson query=Filters.eq("_id", id.asString().getValue());
-        while (finChannel.read(byteBuffer)!=-1){//先读取上一次的
-            //翻转指针
-            byteBuffer.flip();
-            //remaining = limit - position
-            byte[] bytes = new byte[byteBuffer.remaining()];
-            byteBuffer.get(bytes);
-            uploadStreamStream.write(bytes);
-            //清空buffer
-            byteBuffer.clear();
-        }
-        uploadStreamStream.close();
-        return bucket.find(query).iterator().hasNext();*/
         space= checkSpaceLegal(space,mongoStorageConfig.getCollection());
         MongoDatabase db = mongoClient.getDatabase(mongoStorageConfig.getDatabase());
         GridFSBucket bucket = GridFSBuckets.create(db,space); // 如果这里不指定 集合 也就是 bucket 那么默认就是 fs
@@ -236,11 +191,9 @@ public class MongoStorage  implements IStorage {
         while (finChannel.read(byteBuffer)!=-1){//先读取上一次的
             //翻转指针
             byteBuffer.flip();
-            //remaining = limit - position
             byte[] bytes = new byte[byteBuffer.remaining()];
             byteBuffer.get(bytes);
             uploadStreamStream.write(bytes);
-            //清空buffer
             byteBuffer.clear();
         }
         uploadStreamStream.close();

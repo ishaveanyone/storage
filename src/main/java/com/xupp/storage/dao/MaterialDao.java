@@ -1,6 +1,6 @@
 package com.xupp.storage.dao;
 
-import com.xupp.storage.define.ErsMaterialEntity;
+import com.xupp.storage.model.po.ErsMaterialEntity;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

@@ -1,5 +1,5 @@
 
-package com.xupp.storage.define;
+package com.xupp.storage.model.po;
 
 import lombok.Data;
 

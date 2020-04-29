@@ -1,5 +1,5 @@
 
-package com.xupp.storage.define;
+package com.xupp.storage.define.util;
 
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;

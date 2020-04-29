@@ -1,4 +1,4 @@
-package com.xupp.storage.define;
+package com.xupp.storage.define.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

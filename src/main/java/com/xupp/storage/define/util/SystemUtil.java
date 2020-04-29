@@ -1,4 +1,4 @@
-package com.xupp.storage.define;
+package com.xupp.storage.define.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -5,7 +5,7 @@ spring:
     show-sql: false # 是否在控制台打印SQL语句
     properties:
       hibernate:
-        default_schema: test
+        default_schema: public
   aop:
     auto: true
     proxy-target-class: true # 默认设置为false,使用的是标准Java动态代理的实现（接口），而不是cglib（类）
@@ -13,9 +13,9 @@ spring:
     default-domain: test # 指定JMX define name
   datasource:
     sql-script-encoding: utf-8 # 解决中文乱码
-    url: jdbc:postgresql://127.0.0.1:15432/test
-    username: test
-    password: test
+    url: jdbc:postgresql://127.0.0.1:5432/xuppdb
+    username: xupp
+    password: pass
     driver-class-name: org.postgresql.Driver
     maxActive: 200
     initialSize: 10
