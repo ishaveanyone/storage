@@ -3,13 +3,13 @@
 package com.xupp.storage.storage.fileconvertor;
 
 
-import com.xupp.storage.ApplicationContextProvider;
+import com.xupp.storage.SorageApplicationContextProvider;
 
 public class FileConvertorBuilder {
 
-    private  JacobFileConvertor jacobFileConvertor= ApplicationContextProvider.getBean(JacobFileConvertor.class); //事现配置好一些bena
+    private  JacobFileConvertor jacobFileConvertor= SorageApplicationContextProvider.getBean(JacobFileConvertor.class); //事现配置好一些bena
 
-    private  KkfileviewFileConvertor kkfileviewFileConvertor= ApplicationContextProvider.getBean(KkfileviewFileConvertor.class); //事现配置好一些bena
+    private  KkfileviewFileConvertor kkfileviewFileConvertor= SorageApplicationContextProvider.getBean(KkfileviewFileConvertor.class); //事现配置好一些bena
 
     //默认非单例
     private boolean single=false;

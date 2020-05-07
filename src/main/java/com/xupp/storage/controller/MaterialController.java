@@ -81,7 +81,6 @@ public class MaterialController {
         return  this.materialFacade.deleteMaterial(space,guids);
     }
 
-
     //预览文件
     @GetMapping(value="private/v1/preview/{key}/{space}")
     @ApiOperation(value="预览文件",
@@ -159,9 +158,6 @@ public class MaterialController {
         return this.materialFacade.getMaterialByLevel(materialQueryDTO);
     }
 
-
-
-
     //断点续传
     @PostMapping(value="private/v1/checkUploaded")
     @ApiOperation(value="使用轮询返回后台对应文件的已经缓存大小",
@@ -171,7 +167,6 @@ public class MaterialController {
             @RequestBody  MaterialQueryDTO materialQueryDTO){
         return this.materialFacade.checkUploaded(materialQueryDTO);
     }
-
 
     //断点续传
     @PostMapping(value="private/v1/websocketCheckUploaded/{guid}")

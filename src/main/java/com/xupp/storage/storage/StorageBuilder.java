@@ -1,16 +1,16 @@
 package com.xupp.storage.storage;
 
 
-import com.xupp.storage.ApplicationContextProvider;
+import com.xupp.storage.SorageApplicationContextProvider;
 
 public class StorageBuilder {
 
     private  MongoStorage mongoStorage=
-            ApplicationContextProvider.getBean(MongoStorage.class);//事现配置好一些bena
+            SorageApplicationContextProvider.getBean(MongoStorage.class);//事现配置好一些bena
 
 
     private  OssStorage ossStorage=
-            ApplicationContextProvider.getBean(OssStorage.class);
+            SorageApplicationContextProvider.getBean(OssStorage.class);
 
 
 

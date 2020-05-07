@@ -9,7 +9,7 @@ import com.mongodb.client.gridfs.*;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.mongodb.client.gridfs.model.GridFSUploadOptions;
 import com.mongodb.client.model.Filters;
-import com.xupp.storage.ApplicationContextProvider;
+import com.xupp.storage.SorageApplicationContextProvider;
 import com.xupp.storage.storage.config.MongoStorageConfig;
 import com.xupp.storage.storage.keygenerator.MongoKeyGenerate;
 import org.apache.commons.collections4.IteratorUtils;
@@ -34,24 +34,23 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import static com.xupp.storage.storage.IStorage.checkSpaceLegal;
 
 //version mongo-3.4版本
+@Component
 public class MongoStorage  implements IStorage {
 
     private MongoClient mongoClient;
 
     //不要使用依赖注入 如果使用依赖注入那么新创建的
 
-    private MongoStorageConfig mongoStorageConfig;
-
-    {
-        mongoStorageConfig=ApplicationContextProvider.getBean(MongoStorageConfig.class);
-    }
+    //不要使用依赖注入 如果使用依赖注入那么新创建的
+    @Autowired
+    private  MongoStorageConfig mongoStorageConfig;
 
 
     @Override
     public IStorage connect() {
         //如果使用多例
         if(mongoStorageConfig==null){
-            mongoStorageConfig= ApplicationContextProvider.getBean(MongoStorageConfig.class);
+            mongoStorageConfig= SorageApplicationContextProvider.getBean(MongoStorageConfig.class);
         }
         if("true".equalsIgnoreCase(mongoStorageConfig.getAuthEnable())){
             connectAuth();

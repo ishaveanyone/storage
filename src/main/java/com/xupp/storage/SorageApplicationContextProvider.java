@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ApplicationContextProvider implements ApplicationContextAware {
+public class SorageApplicationContextProvider implements ApplicationContextAware {
     /**
      * 上下文对象实例
      */

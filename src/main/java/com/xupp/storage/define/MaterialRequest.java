@@ -1,6 +1,7 @@
 
 package com.xupp.storage.define;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Map;
@@ -15,6 +16,10 @@ public class MaterialRequest {
     private String parentGuid;
     //存储空间域
     private String space;
+
+    @JsonIgnore
+    private String creator; // 不必要的参数
+
     //这个是一个可扩展的标签
     private Map<String,String> tags;
 

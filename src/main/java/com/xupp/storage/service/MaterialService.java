@@ -5,6 +5,7 @@ package com.xupp.storage.service;
 import com.alibaba.fastjson.JSONObject;
 import com.xupp.storage.dao.MaterialDao;
 import com.xupp.storage.define.*;
+import com.xupp.storage.exception.MaterialException;
 import com.xupp.storage.model.dto.MaterialQueryDTO;
 import com.xupp.storage.model.po.ErsMaterialEntity;
 import com.xupp.storage.model.vo.MaterialTreeVO;
@@ -17,6 +18,7 @@ import org.springframework.util.Assert;
 import com.alibaba.fastjson.JSON;
 
 
+import javax.annotation.Resource;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -30,7 +32,7 @@ public class MaterialService  {
     @Autowired
     private MaterialDao materialDao;
 
-    @Autowired
+    @Resource(name = "storageMapper")
     private MapperFacade mapper;
 
     public MaterialTreeVO addMaterial(MaterialRequest addRequest, MaterialTypeEnum type) {
@@ -42,11 +44,10 @@ public class MaterialService  {
             if (StringUtils.isNotBlank(parentGud)) {
                 ErsMaterialEntity checkParentMaterial = this.materialDao.findById(parentGud).get();
                 if (null == checkParentMaterial) {
-//                    throw new MaterialException.NotFound(parentGud);
+                    throw new MaterialException.NotFound(parentGud);
                 }
             }
         }
-
         Map<String,String> tags=addRequest.getTags();
         List<ErsMaterialEntity> adata= materialDao.findByParentGuid(addRequest.getParentGuid());
         //筛选是不是有 "相同"
@@ -73,7 +74,7 @@ public class MaterialService  {
         //找出这一层级最大的 如果是空 那么就指定postion 是 0
         ErsMaterialEntity ersMaterialEntity = this.mapper.map(addRequest, ErsMaterialEntity.class);
         ersMaterialEntity.setNodeType(type.getType());
-        ersMaterialEntity.setCreator("");
+        ersMaterialEntity.setCreator(addRequest.getCreator());
         ersMaterialEntity.setTags(JSON.toJSONString(addRequest.getTags()));
         if(type.equals(MaterialTypeEnum.FILE)){
             ersMaterialEntity.setState(Constants.Material.UPLOADING);
@@ -87,7 +88,7 @@ public class MaterialService  {
     public Boolean deleteMaterial(String materialGuid) {
         ErsMaterialEntity delEntity = this.materialDao.findById(materialGuid).get();
         if(null == delEntity){
-//            throw new MaterialException.NotFound(materialGuid);
+            throw new MaterialException.NotFound(materialGuid);
         }
         this.materialDao.delete(delEntity);
         return true;
@@ -105,18 +106,13 @@ public class MaterialService  {
         return false;
     }
 
-    //todo 获取列表接口
-    public Object getMaterialTree(String refGuid) {
-       return null;
-    }
 
     public MaterialTreeVO getMaterial(String materialGuid) {
         ErsMaterialEntity ersMaterialEntity=materialDao.findById(materialGuid).get();
         if(ersMaterialEntity!=null){
             return this.map(ersMaterialEntity);
         }
-
-        throw new RuntimeException("");
+        throw new MaterialException.NotFound(materialGuid);
     }
 
     private MaterialTreeVO map(ErsMaterialEntity ersMaterialEntity){
