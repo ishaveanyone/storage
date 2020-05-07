@@ -100,6 +100,7 @@ public class MaterialService  {
         List<ErsMaterialEntity> rdelEntity = this.materialDao.findByGuidIn(materialGuids);
         materialDao.deleteAll(rdelEntity); // 如果删除失败就会回滚
         List<ErsMaterialEntity> drdelEntity= this.materialDao.findByGuidIn(materialGuids);
+
         if(drdelEntity.isEmpty()){
             return true;
         }

@@ -3,6 +3,7 @@ package com.xupp.storage.facade;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xupp.storage.define.*;
+import com.xupp.storage.exception.MaterialException;
 import com.xupp.storage.facator.FileConvertorFactory;
 import com.xupp.storage.facator.StorageServerFactor;
 import com.xupp.storage.model.dto.MaterialQueryDTO;
@@ -134,7 +135,7 @@ public class MaterialFacade {
         //如果删除数据库数据成功 那么 就删除 文件
         try(IStorage iStorage = storageServerFactor.getStorageServer();) {
             if(!iStorage.removeFiles(space,guids)){
-//                throw new MaterialException.FileDeleteFail(String.join(",",guids));
+                throw new MaterialException.FileDeleteFail(String.join(",",guids));
             }
         }catch (Exception e){
             throw  new RuntimeException("删除出错");
