@@ -1,4 +1,10 @@
 spring:
+  application:
+    name: storage
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
   jpa:
     hibernate:
       ddl-auto: update # 数据库的操作模式
@@ -6,6 +12,8 @@ spring:
     properties:
       hibernate:
         default_schema: public
+        temp:
+          use_jdbc_metadata_defaults: false
   aop:
     auto: true
     proxy-target-class: true # 默认设置为false,使用的是标准Java动态代理的实现（接口），而不是cglib（类）
@@ -59,3 +67,4 @@ storage:
       username: useroms #配置授权用户对应的用户名称
       password: Passw0rd #配置授权用户对应的用户密码
       database: admin  #认证用户存放的数据库位置
+

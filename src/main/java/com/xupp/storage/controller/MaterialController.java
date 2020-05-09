@@ -44,7 +44,6 @@ public class MaterialController {
         return  this.materialFacade.addMaterial(addRequest,MaterialTypeEnum.DIRECTORY,httpServletRequest);
     }
 
-
     @PostMapping(value="private/v1/file")
     @ApiOperation(value="文件保存(可以绑定参数file 保存一个小文件)",
             response = Object.class,
@@ -68,8 +67,6 @@ public class MaterialController {
         return  this.materialFacade.addMaterial(materialRequest, MaterialTypeEnum.FILE,httpServletRequest);
     }
 
-
-
     @DeleteMapping(value="private/v1/material/{space}")
     @ApiOperation(value="批量删除",
             response = Boolean.class,
@@ -81,7 +78,6 @@ public class MaterialController {
         return  this.materialFacade.deleteMaterial(space,guids);
     }
 
-    //预览文件
     @GetMapping(value="private/v1/preview/{key}/{space}")
     @ApiOperation(value="预览文件",
             response = MaterialViewResultVO.class,
@@ -94,7 +90,6 @@ public class MaterialController {
         return this.materialFacade.previewMaterial(space,key,httpServletRequest);
     }
 
-    //
     @GetMapping(value="private/v1/download/{key}/{space}")
     @ApiOperation(value="下载文件",
             response = MaterialViewResultVO.class,
@@ -147,7 +142,6 @@ public class MaterialController {
         return null;
     }
 
-    //分级获取资料数据
     @PostMapping(value="private/v1/query")
     @ApiOperation(value="搜索文件 如果获取第一级那么就使用 pid =-1",
             response = Object.class,
@@ -158,7 +152,6 @@ public class MaterialController {
         return this.materialFacade.getMaterialByLevel(materialQueryDTO);
     }
 
-    //断点续传
     @PostMapping(value="private/v1/checkUploaded")
     @ApiOperation(value="使用轮询返回后台对应文件的已经缓存大小",
             response = String.class,
@@ -168,7 +161,6 @@ public class MaterialController {
         return this.materialFacade.checkUploaded(materialQueryDTO);
     }
 
-    //断点续传
     @PostMapping(value="private/v1/websocketCheckUploaded/{guid}")
     @ApiOperation(value="使用websocket返回后台对应文件的已经缓存大小",
             response = Long.class,
@@ -196,9 +188,6 @@ public class MaterialController {
                  chunkNum,//分片编号
                  nodeGuid);
     }
-
-
-
 
 
 }
