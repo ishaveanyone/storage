@@ -11,7 +11,7 @@ import com.xupp.storage.model.vo.MaterialTreeVO;
 import com.xupp.storage.model.vo.MaterialViewResultVO;
 import com.xupp.storage.service.MaterialService;
 import com.xupp.storage.storage.IStorage;
-import com.xupp.storage.websocket.ResponseMessage;
+import com.xupp.storage.define.websocket.ResponseMessage;
 import org.apache.commons.io.FileUtils;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import org.slf4j.Logger;

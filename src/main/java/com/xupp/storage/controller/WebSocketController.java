@@ -10,7 +10,8 @@
 package com.xupp.storage.controller;
 
 import com.xupp.storage.define.Constants;
-import com.xupp.storage.websocket.ResponseMessage;
+
+import com.xupp.storage.define.websocket.ResponseMessage;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;

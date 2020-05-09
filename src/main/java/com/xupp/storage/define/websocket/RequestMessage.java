@@ -1,6 +1,6 @@
 
 
-package com.xupp.storage.websocket;
+package com.xupp.storage.define.websocket;
 
 import lombok.Data;
 

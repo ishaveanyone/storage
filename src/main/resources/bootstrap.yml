@@ -1,3 +1,4 @@
+
 spring:
   application:
     name: storage
@@ -67,4 +68,7 @@ storage:
       username: useroms #配置授权用户对应的用户名称
       password: Passw0rd #配置授权用户对应的用户密码
       database: admin  #认证用户存放的数据库位置
-
+server:
+  servlet:
+    context-path: /storage
+  port: 8811
